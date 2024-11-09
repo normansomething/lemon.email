@@ -1,0 +1,43 @@
+# Learn How to Send Your First Email with Lemón using Vercel Functions.
+To integrate this ESP’s API with Vercel, you can use Vercel’s serverless functions, which allow for HTTP requests to external APIs like the one provided in your example.
+
+Steps to Integrate:
+Create a Serverless Function: In your Vercel project, create an api folder and add a file (e.g., send-email.js), which will serve as your endpoint for sending emails.
+
+Write the Function Code: Use the fetch API in the serverless function to make the POST request to https://app.xn--lemn-sqa.com/api/transactional/send with the specified headers and body.
+
+Environment Variables: Securely store your API key in Vercel's environment variables, which can be accessed within the function to keep your credentials safe.
+
+Triggering the Function: You can call this API route from your frontend or other parts of the Vercel app, which will trigger the email-sending request.
+
+--------------------------------------------------------------
+
+Here’s a basic example of what the function might look like:
+
+javascript
+export default async function handler(req, res) {
+  const response = await fetch("https://app.xn--lemn-sqa.com/api/transactional/send", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "X-Auth-APIKey": process.env.LEMON_API_KEY,
+    },
+    body: JSON.stringify({
+      fromname: "Sender",
+      fromemail: "sender@domain.com",
+      to: "recipient@domain.com",
+      subject: "A message",
+      body: "<html><body>A test message</body></html>",
+    }),
+  });
+
+  if (response.ok) {
+    res.status(200).json({ message: "Email sent successfully" });
+  } else {
+    res.status(response.status).json({ error: "Failed to send email" });
+  }
+}
+
+----------------------------------------------------------------------
+
+This setup enables Vercel to seamlessly integrate with Lemón Email, allowing for automated email sending based on specific actions or triggers in your application.
