@@ -2,7 +2,7 @@
 
 Lemón is a superior AI-powered email SMTP and API solution for #NoCode and #AI/ML applications, offering a strong alternative to Amazon SES, Resend.com (powered by Amazon SES), Loops.so (also powered by Amazon SES), Postmark, Sendgrid, and Mailgun.
 
-Firstly, Lemón.com is not a rebrand of Lemon.email. We simply purchased Lemon.email for its SEO backlinks and because it ranks on Google for searches like "Lemon Email."
+First of all, Lemón.com is not a rebrand of Lemon.email. We simply acquired the domain Lemon.email for its SEO (search engine optimization)
 
 Beyond a robust email infrastructure with a 100% inbox delivery rate, we’re developing an MX record scanner and implementing smart IP rotation to counter Google’s and Outlook’s AI spam filters.
 
