@@ -1,7 +1,8 @@
 #Overview
 #This documentation provides a comprehensive guide to creating a custom Mail Transfer Agent (MTA) for enterprise-level email sending. The MTA includes features for sending HTML emails, queue management, deliverability tools, security compliance, monitoring, and scalability.
 Features
-Core SMTP Server
+
+#Core SMTP Server
 Queue Management with RabbitMQ
 Deliverability Tools (IP Rotation, Feedback Loop Handling)
 Security and Compliance (SPF, DKIM, DMARC, TLS)
@@ -10,12 +11,15 @@ REST APIs for Integration
 Error Handling
 Unit Testing
 Getting Started
-Prerequisites
+
+#Prerequisites
 Go 1.16 or later
 RabbitMQ
 Prometheus
 Grafana
-Installation
+
+#Installation
+
 Clone the repository:
 sh
 Copy code
