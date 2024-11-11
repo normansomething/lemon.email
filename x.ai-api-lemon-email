@@ -1,0 +1,82 @@
+#x.ai API <> Lemon Email SES integration
+
+Here's a full integration example where x.ai generates text content, which is then emailed using Lemon's SMTP API.
+
+Requirements
+x.ai API Key: Used to authenticate and call x.ai for generating the text.
+Lemon API Key: Used to send the generated content via email.
+Code
+This code is a basic structure in Python, assuming you’ll handle it on a server.
+
+python
+Copy code
+import requests
+
+# Set your API keys here
+X_AI_API_KEY = "your_x_ai_api_key"
+LEMON_API_KEY = "your_lemon_api_key"
+
+# 1. Generate Text with x.ai API
+def get_ai_generated_text(prompt):
+    url = "https://api.x.ai/v1/completions"  # Use the completions endpoint
+    headers = {
+        "Authorization": f"Bearer {X_AI_API_KEY}",
+        "Content-Type": "application/json"
+    }
+    data = {
+        "model": "grok-beta",  # Replace with your x.ai model
+        "prompt": prompt,
+        "max_tokens": 100  # Customize as needed
+    }
+
+    response = requests.post(url, headers=headers, json=data)
+    response_data = response.json()
+    
+    # Assuming the API response has the generated text in the 'choices' field
+    generated_text = response_data['choices'][0]['text']
+    return generated_text
+
+# 2. Send the Generated Text via Lemon's SMTP API
+def send_email_via_lemon(recipient_email, subject, body_content):
+    url = "https://app.xn--lemn-sqa.com/api/transactional/send"
+    headers = {
+        "Content-Type": "application/json",
+        "X-Auth-APIKey": LEMON_API_KEY
+    }
+    data = {
+        "fromname": "AI Assistant",
+        "fromemail": "no-reply@yourdomain.com",
+        "to": recipient_email,
+        "subject": subject,
+        "body": f"<html><body>{body_content}</body></html>"
+    }
+
+    response = requests.post(url, headers=headers, json=data)
+    return response.status_code, response.text
+
+# 3. Execute the Process
+def main():
+    prompt = "Write a summary about the importance of AI integration in business."
+    recipient_email = "recipient@domain.com"
+    subject = "AI-Generated Insights"
+
+    # Generate the content
+    generated_text = get_ai_generated_text(prompt)
+
+    # Send the content via email
+    status, response_text = send_email_via_lemon(recipient_email, subject, generated_text)
+    
+    if status == 200:
+        print("Email sent successfully.")
+    else:
+        print(f"Failed to send email: {response_text}")
+
+# Run the process
+main()
+Explanation:
+Generate Text: The get_ai_generated_text function sends a request to x.ai to generate text based on a prompt.
+Send Email: The send_email_via_lemon function formats the text into HTML and sends it via Lemon’s SMTP API.
+Main Process: The main function executes the text generation and sends it as an email.
+Notes:
+Replace placeholder values like X_AI_API_KEY, LEMON_API_KEY, model names, prompt, and email addresses with your actual data.
+Add error handling for production use, especially for API errors or rate limits.
