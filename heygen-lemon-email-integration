@@ -1,0 +1,34 @@
+#Heygen <> Lemón Email API integration
+
+To automate the process of creating an avatar video through HeyGen’s API, retrieving the video link, and sending it via Lemón’s REST API, here’s a step-by-step outline:
+
+1. Create Avatar Video via HeyGen’s API
+Endpoint: Use HeyGen’s video generation API endpoint to create a customized video.
+
+API Key: Ensure you have your HeyGen API key ready to authenticate requests.
+
+Request Format: The request should include the avatar selection, voice preferences, and text for the avatar to speak.
+
+Example Request:
+
+bashCopy codecurl -X POST https://api.heygen.com/video/create \ -H ‘Content-Type: application/json’ \ -H ‘X-Auth-APIKey: YOUR_HEYGEN_API_KEY’ \ -d ‘{ “avatar”: “Avatar_Name”, “voice”: “Voice_Choice”, “text”: “Your video script here” }’
+
+Response: HeyGen will respond with a video link upon successful creation.
+
+2. Retrieve Video Link from HeyGen API Response
+Store the link from HeyGen’s API response for embedding in the email. Ensure this link is accessible to the recipient by using any necessary permissions or settings for sharing.
+
+3. Send the Video Link via Lemon’s REST API
+Now, you can use Lemón’s transactional email API to email this video link.
+
+Endpoint: https://app.xn--lemn-sqa.com/api/transactional/send
+
+Headers: Include the Content-Type and X-Auth-APIKey.
+
+Body: Construct the email content to include the video link in the HTML.
+
+Example Request:
+
+bashCopy codecurl -s -X POST https://app.xn--lemn-sqa.com/api/transactional/send \ -H ‘Content-Type: application/json’ \ -H ‘X-Auth-APIKey: YOUR_LEMON_API_KEY’ \ -d ‘{ “fromname”: “Sender Name”, “fromemail”: “sender@domain.com”, “to”: “recipient@domain.com”, “subject”: “Your Custom Video Message”, “body”: “<html><body>Watch your video <a href=\”https://heygen.com/videos/your_video_link\">here</a>.</body></html>" }’
+
+By combining HeyGen’s and Lemon’s APIs, you can automatically generate personalized video messages and seamlessly distribute them via email.
