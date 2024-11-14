@@ -1,0 +1,68 @@
+#TypeScript Client for Lemón API
+
+// Import necessary modules for making HTTP requests
+import axios from 'axios';
+
+// Define the payload interface, including optional fields like toname, tag, and variables
+interface EmailPayload {
+  fromname: string;
+  fromemail: string;
+  to: string;
+  toname?: string;
+  subject: string;
+  body: string;
+  replyto?: string;
+  returnpath?: string;
+  tag?: string;
+  variables?: Record<string, any>;
+  route?: string;
+  template?: string;
+}
+
+// Define the main class for interacting with Lemón's API
+class LemonEmailClient {
+  private apiKey: string;
+  private apiUrl: string;
+
+  constructor(apiKey: string, apiUrl = 'https://app.xn--lemn-sqa.com/api/transactional/send') {
+    this.apiKey = apiKey;
+    this.apiUrl = apiUrl;
+  }
+
+  // Method to send a transactional email
+  async sendEmail(payload: EmailPayload): Promise<void> {
+    try {
+      const response = await axios.post(this.apiUrl, payload, {
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Auth-APIKey': this.apiKey,
+        },
+      });
+      console.log('Email sent successfully:', response.data);
+    } catch (error) {
+      console.error('Error sending email:', error);
+    }
+  }
+}
+
+// Usage example:
+const apiKey = 'your-api-key-here'; // Replace with your Lemón API key
+const lemonClient = new LemonEmailClient(apiKey);
+
+// Call sendEmail to send a transactional email
+lemonClient.sendEmail({
+  fromname: 'Bob Sender',
+  fromemail: 'bob@sender.com',
+  to: 'recipient@domain.com',
+  toname: 'Joe User', // Optional: can specify the recipient's name
+  subject: 'Welcome to Our Service',
+  body: '<html><body>Hello, {{var1}}!</body></html>', // Example body with Jinja2 template
+  replyto: 'replyto@sender.com', // Optional: custom reply-to address
+  returnpath: 'returnpath@sender.com', // Optional: custom return-path address
+  tag: 'newusers', // Optional: tag to group messages for reporting
+  variables: {
+    var1: 'value1', // Example variable for Jinja2 templating
+  },
+  route: 'string', // Optional: specify a postal route if needed
+  template: 'string', // Optional: use a predefined template ID
+});
