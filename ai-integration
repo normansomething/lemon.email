@@ -1,0 +1,21 @@
+#Lemon Email - list of all AI integration
+
+```markdown
+| **Company/Model**          | **Focus/Strengths**                                                                                   |
+|---------------------------|-------------------------------------------------------------------------------------------------------|
+| **OpenAI**                 | Versatile, powerful LLMs like GPT-4, for content generation, coding, and conversation.               |
+| **Anthropic (Claude)**     | Safety-focused, steerable conversational AI, great for customer service and chatbots.               |
+| **Google DeepMind (Gemini)**| Advanced reasoning, multimodal capabilities, and Google-integrated services.                         |
+| **Meta (LLaMA)**           | Open-source large models, efficiency in large-scale NLP tasks.                                       |
+| **Cohere**                 | Customizable LLMs, strong retrieval-augmented generation (RAG) for business applications.            |
+| **Mistral AI**            | Open-weight models, MoE architecture, efficient for scaling NLP tasks.                               |
+| **Grok (xAI)**            | Real-time conversational AI, designed to work with social media platforms like **X** (formerly Twitter). |
+| **AI21 Labs**             | Creative content generation, specialized in writing assistants like **Wordtune**.                   |
+| **Hugging Face**          | Leading open-source platform with the largest repository of pre-trained models.                      |
+| **IBM Watson**            | Enterprise-level NLP tools for knowledge extraction, business intelligence, and customer support.   |
+| **Baidu ERNIE**           | Knowledge-intensive NLP models, strong focus on Chinese language and multilingual NLP.              |
+| **Microsoft**             | Integration of GPT models, enterprise solutions through **Azure Cognitive Services**.               |
+| **NVIDIA**                | High-performance hardware and AI solutions for specialized industries like healthcare and automotive. |
+```
+
+You can paste this code into any markdown-compatible editor, GitHub, or other markdown-supported platforms, and it will display the table as shown. Let me know if you need it in another format!
